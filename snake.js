@@ -12,16 +12,16 @@ window.onload = function()
     direction = 0,
     snake = new Array(3),
     active = true,
-    speed = 500;
+    speed = 300;
 
     // Initialize the matrix.
-    var map = new Array(20);
+    var map = new Array(60);
     for (var i = 0; i < map.length; i++) {
-        map[i] = new Array(20);
+        map[i] = new Array(60);
     }
 
-    canvas.width = 204;
-    canvas.height = 224;
+    canvas.width = 604;
+    canvas.height = 624;
 
     var body = document.getElementsByTagName('body')[0];
     body.appendChild(canvas);
@@ -75,9 +75,9 @@ window.onload = function()
                 // Check that it's not out of bounds. If it is show the game over popup
                 // and exit the function.
                 if (snake[0].x < 0 || 
-                    snake[0].x >= 20 ||
+                    snake[0].x >= 60 ||
                     snake[0].y < 0 ||
-                    snake[0].y >= 20) {
+                    snake[0].y >= 60) {
                     showGameOver();
                     return;
                 }
@@ -127,12 +127,15 @@ window.onload = function()
         for (var x = 0; x < map.length; x++) {
             for (var y = 0; y < map[0].length; y++) {
                 if (map[x][y] === 1) {
-                    ctx.fillStyle = 'black';
+                    ctx.fillStyle = 'gray';
                     ctx.fillRect(x * 10, y * 10 + 20, 10, 10);
                 } else if (map[x][y] === 2) {
-                    ctx.fillStyle = 'orange';
+                    ctx.fillStyle = 'DarkOliveGreen';
                     ctx.fillRect(x * 10, y * 10 + 20, 10, 10);          
-                }
+                }else if (map [x][y] != 1 && map [x][y] != 2){
+		    ctx.fillStyle = 'BurlyWood';
+                    ctx.fillRect(x * 10, y * 10 + 20, 10, 10);
+		}
             }
         }
         
@@ -160,15 +163,15 @@ window.onload = function()
     function generateFood(map)
     {
         // Generate a random position for the rows and the columns.
-        var rndX = Math.round(Math.random() * 19),
-            rndY = Math.round(Math.random() * 19);
+        var rndX = Math.round(Math.random() * 59),
+            rndY = Math.round(Math.random() * 59);
         
         // We also need to watch so as to not place the food
         // on the a same matrix position occupied by a part of the
         // snake's body.
         while (map[rndX][rndY] === 2) {
-            rndX = Math.round(Math.random() * 19);
-            rndY = Math.round(Math.random() * 19);
+            rndX = Math.round(Math.random() * 59);
+            rndY = Math.round(Math.random() * 59);
         }
         
         map[rndX][rndY] = 1;
@@ -179,13 +182,13 @@ window.onload = function()
     function generateSnake(map)
     {
         // Generate a random position for the row and the column of the head.
-        var rndX = Math.round(Math.random() * 19),
-            rndY = Math.round(Math.random() * 19);
+        var rndX = Math.round(Math.random() * 59),
+            rndY = Math.round(Math.random() * 59);
 
         // Let's make sure that we're not out of bounds as we also need to make space to accomodate the
         // other two body pieces
         while ((rndX - snake.length) < 0) {
-            rndX = Math.round(Math.random() * 19);
+            rndX = Math.round(Math.random() * 59);
         }
         
         for (var i = 0; i < snake.length; i++) {
