@@ -15,13 +15,13 @@ window.onload = function()
     speed = 300;
 
     // Initialize the matrix.
-    var map = new Array(60);
+    var map = new Array(40);
     for (var i = 0; i < map.length; i++) {
-        map[i] = new Array(60);
+        map[i] = new Array(40);
     }
 
-    canvas.width = 604;
-    canvas.height = 624;
+    canvas.width = 404;
+    canvas.height = 424;
 
     var body = document.getElementsByTagName('body')[0];
     body.appendChild(canvas);
@@ -75,9 +75,9 @@ window.onload = function()
                 // Check that it's not out of bounds. If it is show the game over popup
                 // and exit the function.
                 if (snake[0].x < 0 || 
-                    snake[0].x >= 60 ||
+                    snake[0].x >= 40 ||
                     snake[0].y < 0 ||
-                    snake[0].y >= 60) {
+                    snake[0].y >= 40) {
                     showGameOver();
                     return;
                 }
@@ -163,15 +163,15 @@ window.onload = function()
     function generateFood(map)
     {
         // Generate a random position for the rows and the columns.
-        var rndX = Math.round(Math.random() * 59),
-            rndY = Math.round(Math.random() * 59);
+        var rndX = Math.round(Math.random() * 39),
+            rndY = Math.round(Math.random() * 39);
         
         // We also need to watch so as to not place the food
         // on the a same matrix position occupied by a part of the
         // snake's body.
         while (map[rndX][rndY] === 2) {
-            rndX = Math.round(Math.random() * 59);
-            rndY = Math.round(Math.random() * 59);
+            rndX = Math.round(Math.random() * 39);
+            rndY = Math.round(Math.random() * 39);
         }
         
         map[rndX][rndY] = 1;
@@ -182,13 +182,13 @@ window.onload = function()
     function generateSnake(map)
     {
         // Generate a random position for the row and the column of the head.
-        var rndX = Math.round(Math.random() * 59),
-            rndY = Math.round(Math.random() * 59);
+        var rndX = Math.round(Math.random() * 39),
+            rndY = Math.round(Math.random() * 39);
 
         // Let's make sure that we're not out of bounds as we also need to make space to accomodate the
         // other two body pieces
         while ((rndX - snake.length) < 0) {
-            rndX = Math.round(Math.random() * 59);
+            rndX = Math.round(Math.random() * 39);
         }
         
         for (var i = 0; i < snake.length; i++) {
