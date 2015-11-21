@@ -1,10 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Snake Game</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script>
+            function stageContent(content) {
+                $("#stage").html(content);
+            }
+            
+            $(function(){
+                $.get("home.html", stageContent);
+                
+                $("input[role=startGame]a").click(function(e) {
+                    e.preventDefault();
+                    
+                    var request = $(this).attr("href");
+         cs           if (request == "snake") {
+                        $.get("snake.html", stageContent);
+                        document.title = $(this).text();
+                        $('li').removeClass('active');
+                        $('#snake').addClass('active');
+                    }
+                    else{
+                        $.get("home.html", stageContent);
+                        document.title = $(this).text();
+                        $('li').removeClass('active');
+                    }
+                });
+            });
+                    
+        </script>
+        
+        <style>
+            body{
+                background-image: url("landscape.png");
+                background-size:100%;
+                height: 100%;
+                width: 100%;
+                background-repeat: no-repeat;
+            }
+            h1, h2{
+                text-align: center;
+                color: firebrick;
+                font-family: fantasy;
+            }
+            h2{
+                padding-top: 50px;
+            }
+            
+            img {
+                position: absolute;
+                top: 0; bottom:0; left: 0; right:0;
+                margin: auto;
+            }
 
-<!Doctype html>
-<head>
-    <title></title>
-    
-</head>
-
-<body>
-</body>
+        </style>
+        
+    </head>
+    <body>
+        
+        <h1><b>Welcome To The SNAKE Game</b></h1>
+        <h2>Click On The Snake To Play</h1>
+        <a role="startGame" href="snake.html"> <img id="playSnake" src="Snake-36-500x189.png" alt="snake"></a>
+    </body>
 </html>
